@@ -5,13 +5,9 @@
                 <img src="../img/usuario.png" alt="">
                 <h1>Mis datos</h1>
             </div>
-            <div class="panelVertical">
-                <img src="../img/cita.png" alt="">
-                <h1>Mis citas</h1>
-            </div>
         </div>
         
-        <div v-if="loaded" class="panelDerecho">
+        <div v-if="loaded" class="panelDerechoUser" id="panelDerechoUser">
             <div class="titlesection">
                 <h1>MIS DATOS PERSONALES</h1>
             </div>
@@ -160,7 +156,7 @@
         align-items: center;
     }
 
-    .panelDerecho{
+    .panelDerechoUser{
         width: 80%;
         flex-direction: column;
         padding-top: 10px;
@@ -177,11 +173,6 @@
         padding-left: 20px;
         padding-bottom: 10px;
         font-family: 'Roboto','sans-serif';
-    }
-
-    .lineaHorizontal{
-        width: 60%;
-        background-color: #0c181c;
     }
 
     .titlesection{

@@ -5,6 +5,7 @@
       <nav v-if="is_auth">
         <button @click="loadHome">Inicio</button>
         <button @click="loadCliente">Cliente</button>
+        <button @click="loadCita">Cita</button>
         <button @click="logout">Cerrar Sesión</button>
       </nav>
       <nav v-else> 
@@ -51,6 +52,9 @@
       },
       loadSignUp: function(){
         this.$router.push({name: "signup"})
+      },
+      loadCita: function(){
+        this.$router.push({name: "cita"})
       },
       completedLogin: function(data){
         localStorage.setItem("isAuth",true);

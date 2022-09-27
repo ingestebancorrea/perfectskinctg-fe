@@ -12,7 +12,7 @@
                 <input type="text" v-model="user.apellidos" placeholder="Apellidos">
                 <br>
                 <select name="" id="select_td" v-model="user.tipoDocumento">
-                    <option disabled selected>Selecciona una opción</option>
+                    <option value="" disabled selected>Selecciona una opción</option>
                     <option>Cedula Ciudadania</option>
                     <option>Tarjeta de indentidad</option>
                     <option>Pasaporte</option>
@@ -22,7 +22,7 @@
                 <input type="text" v-model="user.email" placeholder="Email">
                 <br>
                 <select name="" id="select_tu" v-model="user.tipoUsuario">
-                    <option disabled selected>Selecciona una opción</option>
+                    <option  value="" disabled selected>Selecciona una opción</option>
                     <option>Administrador</option>
                     <option>Usuario</option>
                 </select>
