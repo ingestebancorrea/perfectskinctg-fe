@@ -8,22 +8,7 @@
         </div>
         
         <div class="panelDerechoCita" id="panelDerechoCita">
-          <table>
-            <tr>
-              <td>Fecha</td>
-              <td>Hora</td>
-              <td>Lugar</td>
-              <td>Cliente</td>
-              <td>Servicio</td>
-            </tr>
-            <tr v-for="(cita, index) in citas" :key="index">
-              <td v-text="cita.fecha"></td>
-              <td v-text="cita.hora"></td>
-              <td v-text="cita.lugar"></td>
-              <td v-text="cita.cliente"></td>
-              <td v-text="cita.servicio"></td>
-            </tr>
-          </table>
+          <b-table striped hover :items="citas" :fields="fields"></b-table>
         </div>
     </div>
 </template>
@@ -33,6 +18,10 @@
     name: "Cita",
     data: function () {
       return {
+          fields: [
+            {key: 'fecha', label: 'Fecha'},
+            {key: 'hora', label: 'Hora'}
+          ],
           citas: []
         }
     },
@@ -46,7 +35,7 @@
         .then(result => {
           this.citas = result.data
         }).cath((error)=>{
-          alert('Erorr en el get',error)
+          alert(error)
         })
       },
       
