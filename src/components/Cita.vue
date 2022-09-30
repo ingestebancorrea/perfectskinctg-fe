@@ -8,7 +8,22 @@
         </div>
         
         <div class="panelDerechoCita" id="panelDerechoCita">
-          <b-table striped hover :items="citas" :fields="fields"></b-table>
+          <table>
+            <tr>
+              <td>Fecha</td>
+              <td>Hora</td>
+              <td>Lugar</td>
+              <td>Cliente</td>
+              <td>Servicio</td>
+            </tr>
+            <tr v-for="cita in citas.data" :key="cita.id">
+              <td>{{cita.fecha}}</td>
+              <td>{{cita.hora}}</td>
+              <td>{{cita.lugar}}</td>
+              <td>{{cita.cliente}}</td>
+              <td>{{cita.servicio}}</td>
+            </tr> 
+          </table>
         </div>
     </div>
 </template>
@@ -18,10 +33,6 @@
     name: "Cita",
     data: function () {
       return {
-          fields: [
-            {key: 'fecha', label: 'Fecha'},
-            {key: 'hora', label: 'Hora'}
-          ],
           citas: []
         }
     },
