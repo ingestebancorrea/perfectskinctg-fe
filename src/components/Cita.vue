@@ -7,76 +7,65 @@
             </div>
         </div>
         
-        <div  class="panelDerechoCita" id="panelDerechoCita">
-            <div class="titlesectioncita">
-                <h1>MIS CITAS</h1>
-            </div>
-            <br>
-            <div class="sectioncita">
-                <div class="datospanelcita">
-                    <h2 class="namei">Fecha:</h2>
-                    <br>
-                    <input type="date" v-model="date">
-                </div>
-                <div class="datospanelcita">
-                    <h2>Hora:</h2>
-                    <br>
-                    <input type="text" v-model="hour">
-                </div>
-                <div class="datospanelcita">
-                    <h2>Lugar:</h2>
-                    <br>
-                    <input type="text" v-model="location">
-                </div>
-                <div class="datospanelcita">
-                    <h2>Cliente:</h2>
-                    <br>
-                    <input type="text" v-model="client">
-                </div>
-                <div class="datospanelcita">
-                    <h2>Servicio:</h2>
-                    <br>
-                    <input type="text" v-model="service">
-                </div>
-                <div class="datospanelcita">
-                    
-                </div>
-            </div>
+        <div class="panelDerechoCita" id="panelDerechoCita">
+          <table>
+            <tr>
+              <td>Fecha</td>
+              <td>Hora</td>
+              <td>Lugar</td>
+              <td>Cliente</td>
+              <td>Servicio</td>
+            </tr>
+            <tr v-for="(cita, index) in citas" :key="index">
+              <td v-text="cita.fecha"></td>
+              <td v-text="cita.hora"></td>
+              <td v-text="cita.lugar"></td>
+              <td v-text="cita.cliente"></td>
+              <td v-text="cita.servicio"></td>
+            </tr>
+          </table>
         </div>
     </div>
 </template>
 <script>
-import jwt_decode from "jwt-decode";
-import axios from "../utils/axios";
-export default {
-  name: "Cita",
-  data: function () {
-    return {
-        fecha: "",
-        hora: "",
-        lugar: "",
-        cliente: "",
-        servicio: "",
-        loaded: false,
-    }
-  },
-  methods: {
-    getCita: async function(){
-      axios.get(`cita/`, {headers: {}})
+  import axios from "../utils/axios";
+  export default {
+    name: "Cita",
+    data: function () {
+      return {
+          citas: []
+        }
+    },
+    methods: {
+      getCita: async function(){
+        await this.verifyToken();
 
-      .then(result => {
-        this.date = result.data.fecha;
-        this.hour = result.data.hora;
-        this.location = result.data.lugar;
-        this.client = result.data.client;
-        this.service = result.data.service;
-        this.loaded = true;
-      }).cath(()=>{
-        alert('Erorr en el get')
-      })
+        let token = localStorage.getItem("token_access");
+
+        axios.get(`cita`, {headers: {"Authorization": `Bearer ${token}`}})
+        .then(result => {
+          this.citas = result.data
+        }).cath((error)=>{
+          alert('Erorr en el get',error)
+        })
+      },
+      
+      verifyToken: function(){
+        let refresh = localStorage.getItem("token_refresh");//recuperar datos del LocalStorage
+
+        return axios.post("refresh/", {refresh})
+        .then(result => {
+          localStorage.setItem("token_access", result.data.access)
+          }).catch(()=>{
+            this.$emit("logout");
+          })
+        }   
+    },
+    
+    mounted(){
+      this.getCita();
     }
-  }
-};
+ };
 
 </script>
 <style>
@@ -104,60 +93,35 @@ export default {
   }
 
   .panelVerticalCita{
-        font-size: 10px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        column-gap:  15px;
-        padding-top: 10px;
-        padding-left: 20px;
-        padding-bottom: 10px;
-        font-family: 'Roboto','sans-serif';
-  }
-
-  .titlesectioncita{
-    font-size: 12px;
-    font-family: 'Roboto','sans-serif';
-    padding-left: 65px;
-  }
-
-  .sectioncita{
-    font-size: 12px;
+    font-size: 10px;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    max-width: 100%;
-    gap: 15px;/* row-gap*/
-  }
-
-  .sectioncita input{
-    border: solid #0c181c;
-    border-radius: 5px;
-    width: 96%;
-    height: 50%;
-    padding: 5px;
-  }
-
-  .sectioncita button{
-    color: #0c181c;
-    background-color: #F5B7B1;
-    border: 1px solid #F5B7B1;
-        
-    border-radius: 5px;
-    padding: 10px 20px;
-   }
-
-  .sectioncita button:hover{
-    background-color: #E5E7E9;
-    color: #0c181c;
-  }
-
-  .datospanelcita{
-    width: 40%;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
+    column-gap:  15px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-bottom: 10px;
     font-family: 'Roboto','sans-serif';
   }
+
+  table{
+	  background-color: white;
+	  text-align: left;
+	  border-collapse: collapse;
+	  width: 100%;
+    font-family: 'Roboto','sans-serif';
+ }
+
+ th, td{
+	  padding: 20px;
+ }
+
+ tr:nth-child(even){
+	background-color: #ddd;
+}
+
+ tr:hover td{
+	background-color: #F5B7B1;
+	color: white;
+ }
 </style>
