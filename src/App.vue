@@ -1,4 +1,6 @@
+
 <!-- Componente de html -->
+
 <template>
   <div id="app" class="id">
     <div class="header">
@@ -26,6 +28,7 @@
 </template>
 
 <!-- Componente javascript -->
+
 <script>
 export default {
   name: 'App',
@@ -77,6 +80,7 @@ export default {
 </script>
 
 <!-- Componente hoja de estilo css -->
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
 
