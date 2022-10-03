@@ -1,4 +1,3 @@
-<--Create App use routers -->
 
 import { createApp } from 'vue'
 import App from './App.vue'
