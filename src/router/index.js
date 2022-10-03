@@ -1,8 +1,10 @@
+
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../components/Home.vue'
 import Login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
 import Cliente from '../components/Cliente.vue'
+
 
 const routes = [
   {
@@ -26,10 +28,10 @@ const routes = [
     component: Cliente
   }
 ]
-
 const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
 
 export default router
+
