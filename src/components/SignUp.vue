@@ -11,7 +11,7 @@
                 <br>
                 <input type="text" v-model="user.apellidos" placeholder="Apellidos">
                 <br>
-                <select name="" id="select_td" v-model="user.tipoDocumento">
+                <select name="" v-model="user.tipoDocumento">
                     <option value="" disabled selected>Selecciona una opción</option>
                     <option>Cedula Ciudadania</option>
                     <option>Tarjeta de indentidad</option>
@@ -21,7 +21,7 @@
                 <br>
                 <input type="text" v-model="user.email" placeholder="Email">
                 <br>
-                <select name="" id="select_tu" v-model="user.tipoUsuario">
+                <select name=""  v-model="user.tipoUsuario">
                     <option  value="" disabled selected>Selecciona una opción</option>
                     <option>Administrador</option>
                     <option>Usuario</option>
@@ -96,19 +96,6 @@
     align-items: center;
 }
 
-#select_td{
-    border: 3px solid #0c181c;
-    border-radius: 10px;
-    width: 100%;
-    height: 10%;
-    display: flex;
-
-    flex-direction: column;
-    justify-content: center;
-
-    align-items: center;
-}
-
 #select_tu{
     border: 3px solid #0c181c;
     border-radius: 10px;
@@ -139,9 +126,22 @@
     box-sizing: border-box;
     padding: 10px 20px;
     margin: 5px 0;
-    border: 3px solid #283747;
+    border: 3px solid #0c181c;
     border-radius: 10px;
 }
+
+.signUp_user select
+{
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: 3px solid #0c181c;
+    border-radius: 10px;
+}
+
+
 .signUp_user button
 {
     width: 100%;
